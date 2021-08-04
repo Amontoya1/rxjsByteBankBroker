@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class AcoesService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getcoes(){
+    return this.http.get<any>('http://localhost:3000/acoes');
+  }
+
 }

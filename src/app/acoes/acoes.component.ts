@@ -1,13 +1,22 @@
-import { Component } from '@angular/core';
+import { AcoesService } from './acoes.service';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Acoes } from './modelo/acoes';
 
 @Component({
   selector: 'rxjs-acoes',
   templateUrl: './acoes.component.html',
   styleUrls: ['./acoes.component.scss'],
 })
-export class AcoesComponent {
+export class AcoesComponent implements OnInit {
   acoesInput = new FormControl();
+  acoes: Acoes;
 
-  constructor() {}
+  constructor(private acoesService: AcoesService) { }
+
+  ngOnInit(){
+    this.acoesService.getcoes().subscribe((retornoApi) => {
+      this.acoes =retornoApi.payload;
+    })
+  }
 }
